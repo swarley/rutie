@@ -33,6 +33,10 @@ impl Integer {
     pub fn new(num: i64) -> Self {
         Self::from(num)
     }
+    
+    pub fn unpack(bytes: &[u8], num_words: usize, word_size: usize, nails: usize, flags: i32) -> Self {
+        fixnum::int_unpack(bytes, num_words, word_size, nails, flags).into() 
+    }
 
     /// Retrieves an `i64` value from `Integer`.
     ///

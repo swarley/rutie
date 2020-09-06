@@ -1,5 +1,5 @@
 use rubysys::fixnum;
-use types::Value;
+use types::{c_void, Value};
 
 pub fn i32_to_num(num: i32) -> Value {
     unsafe { fixnum::rb_int2inum(num as isize) }
@@ -47,4 +47,9 @@ pub fn num_to_i64(num: Value) -> i64 {
 
 pub fn num_to_u64(num: Value) -> u64 {
     unsafe { fixnum::rb_num2ull(num) }
+}
+
+pub fn int_unpack(bytes: &[u8], num_words: usize, word_size: usize, nails: usize, flags: i32) -> Value {
+    let bytes = bytes.as_ptr() as *const c_void;
+    unsafe { fixnum::rb_integer_unpack(bytes, num_words, word_size, nails, flags) }
 }

@@ -1,4 +1,5 @@
 use rubysys::libc;
+use rubysys::libc::{c_void};
 use rubysys::types::Value;
 
 extern "C" {
@@ -39,4 +40,6 @@ extern "C" {
     // unsigned LONG_LONG
     // rb_num2ull(VALUE val)
     pub fn rb_num2ull(num: Value) -> libc::c_ulonglong;
+
+    pub fn rb_integer_unpack(bytes: *const c_void, num_words: usize, word_size: usize, nails: usize, flags: i32) -> Value;
 }
